@@ -359,7 +359,7 @@ NEWSCHEMA('Users', function(schema) {
 				EMIT('users/create', model.id);
 			}
 
-			DBMS().log($, model, model.name);
+			DBMS().log($, $.model, model.name);
 		});
 	});
 
