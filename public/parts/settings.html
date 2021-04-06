@@ -1,0 +1,278 @@
+<div data-scope="settings">
+	<div class="header">
+		<label><i class="fa fa-cog"></i>@(Settings)</label>
+		<div data---="validation__?__track:verifytoken">
+			<button name="submit" class="submit exec" data-exec="?/submit" disabled><i class="fa fa-floppy-o"></i>@(SAVE)</button>
+		</div>
+	</div>
+	<div data---="viewbox__null__scrollbar:1;parent:.ui-layout-section;margin:100;$class:invisible;scrollbarshadow:1" class="invisible">
+		<div class="maxwidthleft">
+			<div class="padding">
+
+				<div class="alert m">
+					<div><i class="fa fa-warning mr5"></i><strong>@(WARNING)</strong></div>
+					<div style="margin-top:3px">@(Changing the URL address, will result in the loss of data in third-party apps. URL address is a unique identificator of OpenPlatform. Each third-party app creates a unique identificator of OpenPlatform from URL address and verification token.)</div>
+				</div>
+
+				<div data---="radiobuttonexpert__?.mode__datasource:dev|DEV|fas fa-tools,test|TEST|fas fa-flask,prod|PROD|fa fa-globe">
+					<script type="text/html">
+						<div class="iconbutton">
+							<i class="{{ icon }}"></i>
+							<span>{{ name }}</span>
+						</div>
+					</script>
+				</div>
+				<div class="clearfix"></div>
+				<br />
+
+				<div class="row">
+					<div class="col-md-4 m b">
+						<div data---="input__?.url__required:1;maxlength:500;type:url">@(URL address)</div>
+					</div>
+					<div class="col-md-4 m">
+						<div data---="input__?.name__required:1;maxlength:50">@(OpenPlatform name)</div>
+					</div>
+					<div class="col-md-4 m">
+						<div data---="input__?.email__required:1;type:email">@(Support email)</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-4 m">
+						<div data---="input__?.verifytoken__maxlength:20;camouflage:•">@(Verification token)</div>
+						<div class="help">@(Verification token is a simple security element against Hijacking data of third-party apps. If you change it, you may lose data in third-party apps.) <span class="link exec" data-exec="?/verifytoken"><i class="fa fa-retweet"></i>@(Generate token)</span></div>
+					</div>
+					<div class="col-md-4 m">
+						<div data---="input__?.cookie_expiration__required:1;maxlength:20">@(Cookie / Session expiration)</div>
+						<div class="help">@(Type an expiration time in the form: <code>2 days</code> or <code>3 minutes</code>)</div>
+					</div>
+					<div class="col-md-4 m">
+						<div data---="input__?.allowcreate__maxlength:200">@(URL for creating an account)</div>
+						<div class="help">@(Enables a link to create account at login page)</div>
+					</div>
+				</div>
+
+				<div class="caption">@(Appearance)</div>
+				<div class="row">
+					<div class="col-md-6 m">
+						<div data---="colorselector__settings.colorscheme__null__'#4285f4'"></div>
+					</div>
+				</div>
+
+				<div style="font-size:12px">
+					<div style="float:left" class="mr5"><i class="fa fa-camera mr5"></i>@(Background image:)</div>
+					<div data---="singleupload__settings.background__url:/api/upload/background/;title:{{}};accept:image/*" class="b ui-singleupload">@(Upload image)</div>
+				</div>
+				<div class="clearfix"></div>
+
+				<hr />
+				<div class="row">
+					<div class="col-md-4">
+						<div data---="checkbox__?.guest">@(Allow <b>Guest user</b>)</div>
+						<div data---="checkbox__?.rebuildaccesstoken">@(Re-build access token)</div>
+						<div data---="checkbox__?.allowoauth">@(Enable OAuth 2.0)</div>
+						<div data---="checkbox__?.allowaccesstoken">@(Allow apps to access via Access Token)</div>
+						<div data---="checkbox__?.allowpassword">@(Allow to change password)</div>
+					</div>
+					<div class="col-md-4">
+						<div data---="checkbox__?.allownotifications">@(Allow e-mail notifications)</div>
+						<div data---="checkbox__?.allowclock">@(Show clock)</div>
+						<div data---="checkbox__?.allowstatus">@(Allow custom user statuses)</div>
+						<div data---="checkbox__?.allowbackground">@(Allow to change backgrounds)</div>
+						<div data---="checkbox__?.allowmembers">@(Allow users to add own members)</div>
+					</div>
+					<div class="col-md-4">
+						<div data---="checkbox__?.allowprofile">@(Users can change their profile)</div>
+						<div data---="checkbox__?.allowtheme">@(Allow to change color themes)</div>
+						<div data---="checkbox__?.allowappearance">@(Allow to change appearance)</div>
+						<div data---="checkbox__?.allownickname">@(Allow to change nickname)</div>
+						<div data---="checkbox__?.allowdesktop">@(Allow to change desktop mode)</div>
+					</div>
+				</div>
+				<hr />
+
+				<div class="row">
+					<div class="col-md-4 m">
+						<div data---="input__?.defaultappid__dirsource:main.apps;dirkey:title;dirempty:@(No application)">@(Default application)</div>
+					</div>
+					<div class="col-md-4 m">
+						<div data---="input__?.marketplace__maxlength:500;type:url;placeholder:https://domain.com/marketplace.html;icon:shopping-basket">@(Link to Marketplace)</div>
+					</div>
+					<div class="col-md-4 m">
+						<div data---="input__?.welcome__maxlength:500;type:url;placeholder:https://domain.com/welcome.html">@(Link to Welcome page)</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-2 col-md-4 m">
+						<div data---="input__?.maxmembers__type:number;maxlength:4;disabled:1;icon:users" data-bind="?.allowmembers__enabled">@(Max. allowed members)</div>
+						<div class="help"><code>0</code> @(disables the limit)</div>
+					</div>
+					<div class="col-lg-2 col-md-4 m">
+						<div data---="input__?.timeformat__dirsource:24|@(24 hour clock),12|@(12 hour clock);type:number;dirsearch:false__24">@(Time format)</div>
+					</div>
+					<div class="col-lg-2 col-md-4 m">
+						<div data---="input__?.dateformat__dirsource:dateformats;dirsearch:false__'yyyy-MM-dd'">@(Date format)</div>
+					</div>
+					<div class="col-lg-2 col-md-4 m">
+						<div data---="input__?.numberformat__dirsource:numberformats;dirsearch:false__1">@(Number format)</div>
+					</div>
+					<div class="col-lg-2 col-md-4 m">
+						<div data---="input__?.language__dirsource:languages__'en'">@(Laguage)</div>
+					</div>
+				</div>
+				<br />
+				<div class="caption"><i class="fas fa-key"></i>@(Total API)</div>
+				<div class="alert m">@(With the <b>Total API key</b>, the OpenPlatform can send SMS messages or email messages. You can obtain Total API key on) <a href="https://platform.totaljs.com/?open=api" target="_blank">Total.js Platform</a>.</div>
+				<div class="row">
+					<div class="col-md-4">
+						<div data---="input__?.totalapi__maxlength:100;camouflage:•__''">@(Total API key)</div>
+					</div>
+				</div>
+				<div data-bind="%settingstotalapiresponse__template">
+					<script type="text/html">
+						{{ if value }}
+							<div class="mt10">
+								{{ if value.credits != null }}
+									<div class="inline-message"><i class="fa fa-check-circle"></i> @(Total API is <b>valid</b>. Balance:) <b>{{ value.credits | format(2) }} &euro;</b></div>
+								{{ else }}
+									<div class="inline-message inline-message-error"><i class="fa fa-warning"></i> @(Total API is <b>invalid</b>).</div>
+								{{ fi }}
+							</div>
+						{{ fi }}
+					</script>
+				</div>
+				<div class="help m"><span class="link exec" data-exec="?/verifytotalapi"><i class="fa fa-angle-right mr5"></i>@(Verify API key)</span></div>
+
+				<div class="caption"><i class="far fa-envelope-o"></i>@(SMTP settings)</div>
+				<div class="row">
+					<div class="col-md-4 m">
+						<div data---="input__?.smtp__maxlength:100;placeholder:localhost;camouflage:•__'localhost'">@(SMTP server)</div>
+					</div>
+					<div class="col-md-4 m">
+						<div data---="input__?.sender__type:email;forcevalidation:0__'@'">@(Sender email address)</div>
+					</div>
+				</div>
+				<div data---="input__?.smtpsettings__maxlength:200;dirplaceholder:@(Search application);placeholder:localhost;camouflage:•">@(SMTP settings)</div>
+				<div class="help">@(SMTP settings have to be in valid <b>JSON format</b>, according to the Total.js documentation). <a href="https://docs.totaljs.com/total4/4047d003kk51c/#6ce08001ug51c" target="_blank">@(Documentation)</a></div>
+				<hr />
+				<div data-bind="%settingssmtpresponse__template">
+					<script type="text/html">
+						{{ if value }}
+							{{ if value.success }}
+								<div class="inline-message"><i class="fa fa-check-circle"></i> @(SMTP server is <b>configured correctly</b>).</div>
+							{{ else }}
+								<div class="inline-message inline-message-error"><i class="fa fa-warning"></i> {{ value[0].error }}</div>
+							{{ fi }}
+						{{ fi }}
+					</script>
+				</div>
+				<div class="fs12">
+					<span class="link exec" data-exec="?/verifysmtp"><i class="fa fa-angle-right mr5"></i>@(Verify SMTP server)</span>
+				</div>
+				<br />
+				<div class="caption"><i class="fa fa-users"></i>@(Connect users from another OpenPlatform)</div>
+
+				<div class="alert m">
+					@(Access to this OpenPlatform will be fully under control of defined OpenPlatform below, <b>sign-in form will be disabled</b>. Users won't be able to change own credentials in this OpenPlatform.)
+				</div>
+
+				<div class="row">
+					<div class="col-md-4 m">
+						<div data---="input__?.oauthopenplatform__maxlength:200__''">@(URL address)</div>
+					</div>
+					<div class="col-md-4 m">
+						<div data---="input__?.oauthkey__maxlength:30;camouflage:•__''">@(OAuth 2 key)</div>
+					</div>
+					<div class="col-md-4 m">
+						<div data---="input__?.oauthsecret__maxlength:50;camouflage:•__''">@(OAuth 2 secret)</div>
+					</div>
+				</div>
+
+				<div data-bind="?__show:value&&value.oauthopenplatform&&value.oauthkey&&value.oauthsecret__track:oauthopenplatform,oauthkey,oauthsecret" class="hidden help">
+					<span class="link exec red" data-exec="?/removeoauth2"><i class="fa fa-trash mr5"></i>@(Remove OAuth 2.0 settings)</span>
+				</div>
+
+			</div>
+		</div>
+	</div>
+	<div class="buttons" data---="validation__?__track:verifytoken">
+		<button name="submit" class="submit exec xs100" data-exec="?/submit" disabled><i class="fa fa-floppy-o"></i>@(SAVE)</button>
+		<span class="link cancel exec cancelmodified" data-exec="?/refresh">@(Cancel)</span>
+	</div>
+</div>
+
+<script>
+
+	PLUGIN('settings', function(exports) {
+
+		var backup;
+
+		exports.refresh = function() {
+			DAPI('settings', function(response) {
+
+				if (response.url === 'https://YOURDOMAIN.com' || !response.url)
+					response.url = location.protocol + '//' + location.hostname;
+
+				backup = CLONE(response);
+				SETR('?', response);
+				exports.verifysmtp();
+				exports.verifytotalapi();
+			});
+		};
+
+		exports.reload = function() {
+			exports.refresh();
+		};
+
+		exports.verifytoken = function() {
+			SET('?.verifytoken', GUID(10));
+		};
+
+		exports.verifytotalapi = function(el) {
+			var p = '%settingstotalapiresponse @hideloading';
+			var model = GET('?');
+			var data = {};
+			data.totalapi = model.totalapi;
+			if (data.totalapi) {
+				if (el instanceof jQuery)
+					OP.loading(true);
+				DAPI('totalapi', data, p);
+			} else
+				NUL(p);
+		};
+
+		exports.verifysmtp = function(el) {
+
+			var p = '%settingssmtpresponse @hideloading';
+			var model = GET('?');
+			var data = {};
+			data.smtp = model.smtp;
+			data.smtpsettings = model.smtpsettings;
+
+			if (data.smtp) {
+				if (el instanceof jQuery)
+					OP.loading(true);
+				DAPI('smtp', data, p);
+			} else
+				NUL(p);
+		};
+
+		exports.submit = function() {
+			var model = GET('? @reset');
+			DAPI('settings_save', model, OP.done('@(Settings have been saved successfully)', function() {
+				SET('common.allowoauth', model.allowoauth);
+			}));
+		};
+
+		exports.removeoauth2 = function() {
+			SET('?.oauthopenplatform @change', '');
+			SET('?.oauthkey', '');
+			SET('?.oauthsecret', '');
+		};
+
+		WATCH('?.url', function(path, value) {
+			if (!value)
+				SET('?.url', location.protocol + '//' + location.hostname);
+		}, true);
+
+	});
+</script>
