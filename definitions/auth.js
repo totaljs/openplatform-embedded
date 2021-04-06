@@ -23,7 +23,7 @@ ON('loaded', function() {
 
 	};
 
-	opt.onsession = function(session, $, init) {
+	opt.onsession = function(session, $) {
 
 		var user = session.data;
 		var locked = user.locked == true;
@@ -46,7 +46,7 @@ ON('loaded', function() {
 		if (user.online === false || locked)
 			user.online = true;
 
-		if (init || user.dtlogged2.getDate() !== NOW.getDate()) {
+		if (!user.dtlogged2 || user.dtlogged2.getDate() !== NOW.getDate()) {
 			user.mobile = $.req.mobile;
 			user.dtlogged2 = NOW;
 			user.ua = ($.headers['user-agent'] || '').parseUA();
@@ -69,7 +69,6 @@ ON('loaded', function() {
 		if (session) {
 
 			session.online = true;
-			session.dtlogged = NOW;
 
 			if (session.logged)
 				session.logged++;
@@ -84,6 +83,7 @@ ON('loaded', function() {
 					response.dtlogged2 = session.dtlogged;
 					response.locked = session.locked;
 					response.profileid = session.profileid;
+					session.dtlogged = NOW;
 					var user = REPO.users.findItem('id', meta.userid);
 					user.online = true;
 					user.dtlogged = NOW;

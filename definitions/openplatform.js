@@ -182,7 +182,6 @@ FUNC.logout = function(controller) {
 
 	if (controller.sessionid) {
 
-		var db = DBMS();
 		var index = REPO.sessions.findIndex('id', controller.sessionid);
 		if (index !== -1) {
 			REPO.sessions.splice(index, 1);
@@ -190,7 +189,7 @@ FUNC.logout = function(controller) {
 		}
 
 		controller.ID = 'Logout';
-		db.log(controller);
+		DBMS().log(controller);
 		MAIN.session.logout(controller);
 
 	} else if (controller.user && controller.user.guest)
