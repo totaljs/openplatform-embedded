@@ -10,7 +10,7 @@ OpenPlatform is a simple enterprise-ready platform for running, integrating and 
 
 - download `openplatform`
 - perform `npm install`
-- run openplatform `$ node index.js`
+- run it `$ node index.js`
 - default login is `admin` default password is `admin`
 
 ## Requirements
