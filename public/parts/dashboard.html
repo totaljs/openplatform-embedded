@@ -324,7 +324,7 @@
 					SET('?.online', prepare(response));
 				});
 			});
-		}, 15000, true);
+		}, 30000, true);
 
 		WATCH('?.year', function(path, value) {
 			DAPI('dashboard_yearly/' + value, function(response) {
