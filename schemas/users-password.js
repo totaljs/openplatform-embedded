@@ -16,7 +16,10 @@ NEWSCHEMA('Users/Password', function(schema) {
 		var response = REPO.users.findItem('login', model.name);
 		if (response) {
 
-			if (response.blocked) {
+			if (response.dn) {
+				$.invalid('error-password-dn');
+				return;
+			} else if (response.blocked) {
 				$.invalid('error-blocked');
 				return;
 			} else if (response.inactive) {

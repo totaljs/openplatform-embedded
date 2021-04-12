@@ -105,7 +105,8 @@ NEWSCHEMA('Account', function(schema) {
 			user.background = model.background;
 		}
 
-		var isoauth =  $.user.checksum === 'oauth2';
+		var isoauth = $.user.checksum === 'oauth2';
+		var isldap = !!$.user.dn;
 		var ref = REPO.users.findItem('id', user.id);
 
 		if (CONF.allownickname && model.name && !isoauth) {
@@ -118,7 +119,7 @@ NEWSCHEMA('Account', function(schema) {
 		} else
 			model.name = undefined;
 
-		if (!isoauth && model.password && !model.password.startsWith('***')) {
+		if (!isoauth && !isldap && model.password && !model.password.startsWith('***')) {
 			user.password = model.password = model.password.hash(CONF.hashmode || 'sha256', CONF.hashsalt);
 			model.dtpassword = NOW;
 			user.dtpassword = NOW;
