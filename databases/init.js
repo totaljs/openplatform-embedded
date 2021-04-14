@@ -26,7 +26,7 @@ arr.push({ id: 'colorscheme', type: 'string', value: '#4285f4', name: 'colorsche
 arr.push({ id: 'cookie_expiration', type: 'string', value: '3 days', name: 'cookie_expiration', dtcreated: NOW });
 arr.push({ id: 'defaultappid', type: 'string', value: '', name: 'defaultappid', dtcreated: NOW });
 arr.push({ id: 'email', type: 'string', value: 'info@totaljs.com', name: 'email', dtcreated: NOW });
-arr.push({ id: 'guest', type: 'boolean', value: 'true', name: 'guest', dtcreated: NOW });
+arr.push({ id: 'guest', type: 'boolean', value: 'false', name: 'guest', dtcreated: NOW });
 arr.push({ id: 'marketplace', type: 'string', value: 'https://marketplace.openplatform.cloud', name: 'marketplace', dtcreated: NOW });
 arr.push({ id: 'maxmembers', type: 'number', value: '10', name: 'maxmembers', dtcreated: NOW });
 arr.push({ id: 'name', type: 'string', value: 'OpenPlatform', name: 'name', dtcreated: NOW });

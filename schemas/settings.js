@@ -38,6 +38,7 @@ NEWSCHEMA('Settings', function(schema) {
 	schema.define('allowoauth', Boolean);
 	schema.define('allowaccesstoken', Boolean);
 	schema.define('allowpassword', Boolean);
+	schema.define('allowrememberopenapps', Boolean);
 	schema.define('rebuildaccesstoken', Boolean);
 	schema.define('cookie_expiration', 'String(20)');
 	schema.define('maxmembers', Number);
