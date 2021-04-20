@@ -365,6 +365,23 @@ NEWSCHEMA('Apps', function(schema) {
 				if (isreset) {
 					userapp.countbadges = 0;
 					userapp.countnotifications = 0;
+
+					var isresetprofile = true;
+
+					for (var key in user.apps) {
+						if (key !== $.id) {
+							var tmp = user.apps[key];
+							if (tmp.countnotifications) {
+								isresetprofile = false;
+								break;
+							}
+						}
+					}
+
+					if (isresetprofile) {
+						user.countnotifications = 0;
+						user.countbadges = 0;
+					}
 				}
 
 				user.apps[$.id].countbadges = 0;
