@@ -43,7 +43,6 @@ NEWSCHEMA('Users/Members', function(schema) {
 
 		model.id = UID();
 		model.userid = $.user.id;
-		model.email = model.email;
 		model.dtcreated = NOW;
 
 		REPO.members.push(model);
