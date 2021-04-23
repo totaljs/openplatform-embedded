@@ -21,6 +21,7 @@ NEWSCHEMA('Settings', function(schema) {
 	schema.define('numberformat', [1, 2, 3, 4])(1); // 1: "1 000.10", 2: "1 000,10", 3: "100,000.00", 4: "100.000,00"
 	schema.define('desktop', [1, 2, 3]);
 	schema.define('defaultappid', 'UID');
+	schema.define('logo', 'String(150)');
 	schema.define('guest', Boolean);
 	schema.define('allowstatus', Boolean);
 	schema.define('allowdesktop', Boolean);
@@ -97,7 +98,7 @@ NEWSCHEMA('Settings', function(schema) {
 
 		// Removing older background
 		if (CONF.background && model.background !== CONF.background) {
-			var path = Path.join(FUNC.uploadir('backgrounds'), CONF.background);
+			var path = Path.join(FUNC.uploaddir('backgrounds'), CONF.background);
 			Fs.unlink(path, NOOP);
 			TOUCH('/' + path);
 		}

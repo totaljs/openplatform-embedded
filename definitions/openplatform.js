@@ -1683,7 +1683,7 @@ FUNC.usage_logged = function(user) {
 	db.modify('stats_browser', model_browser, true).id(browserid).insert(usage_browser_insert, { name: user.ua, id: browserid, mobile: user.mobile });
 };
 
-FUNC.uploadir = function(type) {
+FUNC.uploaddir = function(type) {
 	var path = CONF.upload ? Path.join(CONF.upload, type) : PATH.public(type);
 	return path;
 };
