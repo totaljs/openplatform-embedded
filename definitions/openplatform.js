@@ -132,7 +132,7 @@ FUNC.nicknamesanitize = function(value) {
 	return builder.join('');
 };
 
-FUNC.login = function(login, password, callback) {
+FUNC.login = function(login, password, callback, skip) {
 
 	var done = function(err, id, response) {
 
@@ -173,6 +173,15 @@ FUNC.login = function(login, password, callback) {
 			done(null, response.id, response);
 			return;
 		}
+	} else if (CONF.ldap_active && !skip) {
+		// Tries to find user in LDAP
+		FUNC.ldap_import(login, function(err, id) {
+			if (id)
+				FUNC.login(login, password, callback, true);
+			else
+				callback();
+		});
+		return;
 	}
 
 	callback();
