@@ -25,7 +25,7 @@ REPO.oauth = [];
 REPO.members = [];
 
 MAIN.id = 0;                   // Current ID of OpenPlatform
-MAIN.version = 4900;           // Current version of OpenPlatform
+MAIN.version = 4902;           // Current version of OpenPlatform
 MAIN.embedded = true;
 // MAIN.guest                  // Contains a guest user instance
 // MAIN.apps                   // List of all apps
@@ -1539,14 +1539,16 @@ FUNC.log = function(type, rowid, message, $) {
 	DBMS().insert('logs', obj);
 };
 
-function refresh_apps() {
+function refresh_apps(callback) {
 	MAIN.apps.wait(function(app, next) {
 		FUNC.refreshapp(app, function(err, item) {
 			EMIT('apps.sync', item.id);
 			next();
 		});
-	}, FUNC.updateroles);
+	}, () => FUNC.updateroles(callback));
 }
+
+FUNC.refreshappsmeta = refresh_apps;
 
 function emailnotifications() {
 

@@ -21,6 +21,7 @@ NEWSCHEMA('Users/Groups', function(schema) {
 			obj.dtupdated = group.dtupdated;
 			obj.note = group.note;
 			obj.apps = [];
+			obj.count = 0;
 
 			for (var j = 0; j < group.apps.length; j++) {
 				var appid = group.apps[j];
@@ -28,6 +29,13 @@ NEWSCHEMA('Users/Groups', function(schema) {
 			}
 
 			arr.push(obj);
+		}
+
+		for (var i = 0; i < REPO.groups_apps.length; i++) {
+			var ga = REPO.groups_apps[i];
+			var g = arr.findItem('id', ga.groupid);
+			if (g)
+				g.count++;
 		}
 
 		$.callback(arr);
