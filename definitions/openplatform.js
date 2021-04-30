@@ -641,8 +641,8 @@ FUNC.notadmin = function($) {
 
 // Auth token
 FUNC.encodeauthtoken = function(app, user) {
-	var sign = app.id + '-' + user.id;
-	sign += '-' + ((user.accesstoken + app.accesstoken).crc32(true) + '' + (app.id + user.id + user.verifytoken + CONF.accesstoken).crc32(true));
+	var sign = app.id + '-' + user.sessionid;
+	sign += '-' + ((user.accesstoken + app.accesstoken).crc32(true) + '' + (app.id + user.sessionid + user.verifytoken + CONF.accesstoken).crc32(true));
 	return sign.encrypt(CONF.accesstoken.substring(0, 20));
 };
 
@@ -687,9 +687,9 @@ FUNC.decodeauthtoken = function($, callback) {
 	}
 
 	// reads user from DB
-	readuser(arr[1], function(err, user) {
+	readusersession(arr[1], function(err, user) {
 		if (user) {
-			var tmp = (user.accesstoken + app.accesstoken).crc32(true) + '' + (app.id + user.id + user.verifytoken + CONF.accesstoken).crc32(true);
+			var tmp = (user.accesstoken + app.accesstoken).crc32(true) + '' + (app.id + arr[1] + user.verifytoken + CONF.accesstoken).crc32(true);
 			if (tmp === arr[2]) {
 				var obj = { app: app, user: user };
 				if (FUNC.unauthorized(obj, $)) {
@@ -1390,6 +1390,14 @@ ON('ready', function() {
 		});
 	});
 });
+
+function readusersession(id, callback) {
+	var session = REPO.sessions.findItem('id', id);
+	if (session && session.dtexpire > NOW)
+		readuser(session.userid, callback);
+	else
+		callback('error-users-404');
+}
 
 // Reads a user
 function readuser(id, callback) {

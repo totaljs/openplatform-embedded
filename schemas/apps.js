@@ -146,9 +146,6 @@ NEWSCHEMA('Apps', function(schema) {
 		if ($.controller && FUNC.notadmin($))
 			return;
 
-		if (model.typeid === 'designer')
-			model.name = model.title;
-
 		if (!model.name) {
 			$.invalid('error-apps-meta');
 			return;
@@ -164,11 +161,6 @@ NEWSCHEMA('Apps', function(schema) {
 		model.servicetoken = GUID(15);
 		model.linker = model.name.slug(40);
 		model.search = (model.name + ' ' + model.title).toSearch().max(40);
-
-		if (model.typeid === 'designer') {
-			model.online = true;
-			model.url = null;
-		}
 
 		if (!model.services)
 			delete model.services;
