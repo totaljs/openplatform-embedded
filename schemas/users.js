@@ -711,6 +711,10 @@ NEWSCHEMA('Users', function(schema) {
 
 			if (!keys || keys.apps) {
 				model.id = id;
+
+				if (!model.apps)
+					model.apps = [];
+
 				processapps(model, function() {
 
 					$.success(id);
