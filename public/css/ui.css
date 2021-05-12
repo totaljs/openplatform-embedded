@@ -21,7 +21,9 @@ button { outline: 0; }
 .mr10 { margin-right: 10px; }
 
 .alert { color: #856404; background-color: #FFFFD5; border: 1px solid #e8e6bd; border-radius: 3px; padding: 10px 15px; font-size: 12px; line-height: 15px; }
+.alert a { color: #856404; }
 .ui-dark .alert { background-color: #4a4a38; border-color: #656450; color: #a59a7a; }
+.ui-dark .alert a { color: #a59a7a; }
 .ui-dark .bg-yellow { background-color: #272727; }
 .ui-dark .bg-yellow hr { border-color: #353535; }
 
