@@ -180,7 +180,9 @@ NEWSCHEMA('Apps', function(schema) {
 			FUNC.refreshguest();
 			FUNC.updateroles($.done(model.id));
 		});
+
 		DBMS().log($, model, model.name);
+		FUNC.save('apps');
 	});
 
 	schema.setUpdate(function($, model) {
