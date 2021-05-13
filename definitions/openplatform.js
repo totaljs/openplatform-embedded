@@ -1257,7 +1257,7 @@ FUNC.refreshmeta = function(callback, directory) {
 
 		var item = REPO.users[i];
 		var locality = item.locality;
-		var ou = item.ou ? item.ou.join('/') : '';
+		var ou = item.ou;
 		var language = item.language;
 		var position = item.position;
 		var directory = item.directory;

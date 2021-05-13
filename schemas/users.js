@@ -1037,7 +1037,7 @@ FUNC.users_read = function(id, callback) {
 
 	var response = CLONE(user);
 	if (response.ou)
-		response.ou = response.ou.join('/');
+		response.ou = response.ou.split('/');
 
 	delete response.otpsecret;
 	delete response.password;
