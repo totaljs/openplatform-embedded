@@ -200,7 +200,7 @@ function oauthsession() {
 	}
 
 	var db = DBMS();
-	db.one('sessions').fields('userid,dtexpire').id(code).where('dtexpire', '<=', NOW).set('session');
+	db.one('sessions').fields('userid,dtexpire').id(code).where('dtexpire', '>=', NOW).set('session');
 	db.err('error-invalid-accesstoken');
 	db.one('oauth').fields('name').id(filter.client_id).where('accesstoken', filter.client_secret);
 	db.err('error-invalid-accesstoken');

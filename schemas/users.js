@@ -988,6 +988,9 @@ function processapps(model, callback) {
 	var tmp = {};
 	var rem = {};
 
+	if (!model.apps)
+		model.apps = {};
+
 	for (var i = 0; i < model.apps.length; i++) {
 		var app = model.apps[i];
 		var item = REPO.users_apps.findItem(m => m.userid === model.id && m.appid === app.id);
