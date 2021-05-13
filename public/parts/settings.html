@@ -279,11 +279,11 @@
 		};
 
 		exports.verifytoken = function() {
-			SET('?.verifytoken', GUID(10));
+			SET('?.verifytoken', GUID(10), 'show');
 		};
 
 		exports.tms_token = function() {
-			SET('?.secret_tms', Date.now() + GUID(30));
+			SET('?.secret_tms', Date.now() + GUID(30), 'show');
 		};
 
 		exports.verifytotalapi = function(el) {
