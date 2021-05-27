@@ -14,4 +14,4 @@ COPY openplatform.bundle ./bundles/
 RUN npm install
 EXPOSE 8000
 
-CMD [ "node", "index.js", "8000" ]
+CMD [ "npm", "start" ]
