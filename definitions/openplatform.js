@@ -421,6 +421,7 @@ FUNC.meta = function(app, user, serverside) {
 
 	meta.name = CONF.name;
 	meta.version = MAIN.version;
+	meta.mode = CONF.mode;
 
 	// meta.colorscheme = CONF.colorscheme;
 	// meta.background = CONF.background;
@@ -481,6 +482,7 @@ FUNC.metaguest = function() {
 	meta.name = CONF.name;
 	meta.guest = true;
 	meta.id = '0';
+	meta.mode = CONF.mode;
 
 	if (CONF.email)
 		meta.email = CONF.email;
