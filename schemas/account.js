@@ -299,6 +299,7 @@ NEWSCHEMA('Account', function(schema) {
 		var running = $.query.running || '';
 		if (!($.user.running instanceof Array) || $.user.running.join(',') !== running)
 			$.user.running = running.split(',').trim();
+		$.user.dtlogged2 = NOW;
 		$.user.ping = NOW;
 		$.callback(FUNC.profilelive($.user));
 	});

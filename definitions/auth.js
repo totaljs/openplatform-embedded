@@ -30,7 +30,7 @@ ON('loaded', function() {
 
 		$.req.$langauge = user.language;
 
-		if (!locked && (user.locking && user.pin && user.dtlogged2 && !$.req.mobile && user.dtlogged2 < NOW.add('-' + user.locking + ' minutes'))) {
+		if (!locked && (user.locking && user.pin && user.dtlogged2 && !$.req.mobile && user.dtlogged2 < NOW.add('-' + (user.locking + 1) + ' minutes'))) {
 			locked = true;
 			REPO.sessions.findItem('id', session.sessionid).locked = true;
 		}
