@@ -1350,8 +1350,8 @@ function checkuser(next) {
 		model.firstname = 'Total';
 		model.lastname = 'Admin';
 		model.email = 'info@totaljs.com';
-		model.login = 'admin';
-		model.password = 'admin';
+		model.login = GUID(10);
+		model.password = GUID(10);
 		model.gender = 'male';
 		model.sa = true;
 		model.desktop = 3;
@@ -1365,6 +1365,7 @@ function checkuser(next) {
 		model.colorscheme = '#4285f4';
 		model.language = 'en';
 		model.dtbeg = NOW;
+		PREF.set('initcredentials', { login: model.login, password: model.password });
 		$INSERT('Users', model, next);
 	}
 }

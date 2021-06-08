@@ -62,6 +62,9 @@ NEWSCHEMA('Users/Login', function(schema) {
 				return;
 			}
 
+			if (PREF.initcredentials)
+				PREF.set('initcredentials', null);
+
 			DBMS().log($, model, response.name);
 			EMIT('users/login', response.id);
 			FUNC.cookie($, response.id, $.done());

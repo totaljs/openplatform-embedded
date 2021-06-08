@@ -30,7 +30,7 @@ ON('loaded', function() {
 
 		$.req.$langauge = user.language;
 
-		if (!locked && (user.locking && user.pin && user.dtlogged2 && !$.req.mobile && user.dtlogged2 < NOW.add('-' + (user.locking + 1) + ' minutes'))) {
+		if (!locked && (user.locking && user.pin && user.dtlogged2 && !$.req.mobile && user.dtlogged2 < NOW.add('-' + (user.locking + 2) + ' minutes'))) {
 			locked = true;
 			REPO.sessions.findItem('id', session.sessionid).locked = true;
 		}
@@ -99,8 +99,10 @@ ON('loaded', function() {
 
 		for (var i = 0; i < REPO.sessions.length; i++) {
 			var session = REPO.sessions[i];
-			if (meta.sessions.indexOf(session.id) !== -1)
+			if (meta.sessions.indexOf(session.id) !== -1) {
 				session.online = false;
+				session.dtlogged = NOW; // due to locking
+			}
 		}
 
 		if (meta.users.length) {
