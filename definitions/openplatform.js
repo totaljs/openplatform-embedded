@@ -761,7 +761,8 @@ FUNC.makeprofile = function(user, type, app, fields) {
 	// type 4: app users - all info
 
 	// if (type > 2 && (!user.apps || !user.apps[app.id]) || user.inactive)
-	if (type > 2 && user.inactive)
+	// if (type > 2 && user.inactive)
+	if (type > 2)
 		return;
 
 	var obj = {};
@@ -857,6 +858,9 @@ FUNC.makeprofile = function(user, type, app, fields) {
 
 	if (user.ou && (!fields || fields.ou))
 		obj.ou = user.ou instanceof Array ? user.ou.join('/') : user.ou;
+
+	if (user.inactive && (!fields || fields.inactive))
+		obj.inactive = true;
 
 	if (user.dn && (!fields || fields.dn))
 		obj.dn = user.dn;
