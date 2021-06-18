@@ -201,6 +201,7 @@
 				app.callback = callback;
 				EMIT('app_open', app);
 				UPD('user.apps', 'open');
+				$('body').rclass('menushow');
 				exports.remember();
 			});
 
@@ -208,7 +209,7 @@
 
 		exports.reload = function(appid) {
 			var app = user.apps.findItem('id', appid);
-			app && app.send('reload');
+			app && app.send && app.send('reload');
 		};
 
 		exports.restart = function(appid) {
