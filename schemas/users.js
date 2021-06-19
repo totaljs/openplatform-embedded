@@ -1002,13 +1002,17 @@ function processapps(model, callback) {
 		tmp[app.id] = 1;
 	}
 
+	var is = false;
+
 	for (var i = 0; i < REPO.users_apps.length; i++) {
 		var item = REPO.users_apps[i];
-		if (item.userid === model.id && !item.inherited && !tmp[item.appid])
+		if (item.userid === model.id && !item.inherited && !tmp[item.appid]) {
 			rem[item.id] = 1;
+			is = true;
+		}
 	}
 
-	if (rem.length)
+	if (is)
 		REPO.users_apps = REPO.users_apps.remove(m => rem[m.id] === 1);
 
 	FUNC.save('users_apps');
@@ -1034,7 +1038,7 @@ FUNC.users_read = function(id, callback) {
 
 	for (var i = 0; i < REPO.users_apps.length; i++) {
 		var ua = REPO.users_apps[i];
-		if (ua.userid === user.id)
+		if (ua.userid === user.id && !ua.inherited)
 			apps.push({ id: ua.appid, roles: ua.roles });
 	}
 
