@@ -41,7 +41,7 @@ NEWSCHEMA('LDAP', function(schema) {
 		for (var key in model) {
 			var nk = 'ldap_' + key;
 			var data = { type: key === 'active' ? 'boolean' : 'string', value: model[key] + '', dtupdated: NOW };
-			db.modify('cl_config', data, true).id(nk).insert(insert, nk);
+			db.modify('config', data, true).id(nk).insert(insert, nk);
 			CONF[nk] = model[key];
 		}
 
@@ -224,7 +224,6 @@ function import_groups(callback) {
 			return;
 		}
 
-
 		response.wait(function(item, next) {
 
 			var name = item.sAMAccountName;
@@ -278,7 +277,6 @@ function import_users(callback) {
 			return;
 		}
 
-		var users = await DBMS().find('tbl_user').fields('id,reference,checksum,dn').promise();
 		var stamp = GUID(10);
 		var updated = [];
 		var countupdated = 0;
@@ -351,7 +349,7 @@ function import_users(callback) {
 
 			model.checksum = (model.name + '_' + (model.dn || '') + '_' + model.email + '_' + groups.join(',')).makeid();
 
-			var user = users.findItem('reference', model.reference);
+			var user = REPO.users.findItem('reference', model.reference);
 			if (user) {
 
 				model.id = user.id;
@@ -415,7 +413,7 @@ function import_users(callback) {
 				}
 			}
 
-			callback && callback(err, { countremoved: removed, inserted: countinserted, updated: countupdated });
+			callback && callback(err, { countremoved: countremoved, inserted: countinserted, updated: countupdated });
 		});
 
 	});
