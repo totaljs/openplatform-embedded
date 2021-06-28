@@ -29,6 +29,12 @@ NEWSCHEMA('Apps', function(schema) {
 	schema.define('allowreadprofile', Number);
 	schema.define('allowreadmeta', Boolean);
 
+	// TMS
+	schema.jsonschema_define('userid', 'String');
+	schema.jsonschema_define('ip', 'String');
+	schema.jsonschema_define('ua', 'String');
+	schema.jsonschema_define('dttms', 'Date');
+
 	schema.setQuery(function($) {
 
 		if ($.controller && FUNC.notadmin($))
@@ -176,6 +182,7 @@ NEWSCHEMA('Apps', function(schema) {
 		REPO.apps.push(CLONE(model));
 
 		FUNC.refreshapps(function() {
+			PUBLISH('apps-create', FUNC.tms($, model));
 			EMIT('apps/create', model.id);
 			FUNC.refreshguest();
 			FUNC.updateroles($.done(model.id));
@@ -228,6 +235,7 @@ NEWSCHEMA('Apps', function(schema) {
 		}
 
 		FUNC.refreshapps(function() {
+			PUBLISH('apps-update', FUNC.tms($, model));
 			EMIT('apps/update', $.id);
 			FUNC.refreshguest();
 			FUNC.updateroles($.done($.id));
@@ -249,6 +257,7 @@ NEWSCHEMA('Apps', function(schema) {
 		REPO.apps = REPO.apps.remove('id', $.id);
 		FUNC.save('apps');
 		FUNC.refreshapps(function() {
+			PUBLISH('apps-remove', FUNC.tms($, { success: true, id: $.id }));
 			FUNC.updateroles($.done());
 			FUNC.clearcache(null, $.id);
 		});
@@ -332,6 +341,8 @@ NEWSCHEMA('Apps', function(schema) {
 			$.invalid('error-apps-404');
 			return;
 		}
+
+		PUBLISH('apps-open', FUNC.tms($, { name: app.name }));
 
 		DBMS().log($, null, app.name);
 

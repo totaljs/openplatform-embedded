@@ -67,6 +67,12 @@ NEWSCHEMA('Users', function(schema) {
 	schema.define('oauth2', 'UID');
 	schema.define('stamp', 'String(25)');
 
+	// TMS
+	schema.jsonschema_define('userid', 'String');
+	schema.jsonschema_define('ip', 'String');
+	schema.jsonschema_define('ua', 'String');
+	schema.jsonschema_define('dttms', 'Date');
+
 	var fields = { id: 1, name: 1, online: 1, dtcreated: 1, dtupdated: 1, dtmodified: 1, dtlogged: 1 };
 	var fieldsall = ['id', 'name', 'online', 'dtcreated', 'dtupdated', 'dtmodified', 'dtlogged', 'note', 'running'];
 	var fieldsallpublic = ['id', 'name', 'online', 'dtcreated', 'dtupdated', 'dtmodified', 'dtlogged', 'verifytoken', 'accesstoken'];
@@ -341,6 +347,8 @@ NEWSCHEMA('Users', function(schema) {
 			MAIL(model.email, TRANSLATOR(model.language, '@(Welcome to {0})').format(CONF.name), '/mails/welcome', $.model, model.language);
 		}
 
+		PUBLISH('users-create', FUNC.tms($, model));
+
 		$.extend(model, function() {
 			model = CLONE(model);
 			REPO.users.push(model);
@@ -392,6 +400,8 @@ NEWSCHEMA('Users', function(schema) {
 
 		var rebuildaccesstoken = model.rebuildaccesstoken;
 		var rebuildtoken = model.rebuildtoken;
+
+		PUBLISH('users-update', FUNC.tms($, model));
 
 		model.previd = undefined;
 
@@ -770,6 +780,8 @@ NEWSCHEMA('Users', function(schema) {
 				if (item.deputyid === id)
 					item.deputyid = record.deputyid || null;
 			}
+
+			PUBLISH('users-remove', FUNC.tms($, { success: true, id: id}));
 
 			$.extend(null, function() {
 				// Removes data

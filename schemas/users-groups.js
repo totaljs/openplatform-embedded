@@ -50,6 +50,16 @@ NEWSCHEMA('Users/Groups', function(schema) {
 		var insert = false;
 		var apps = model.apps;
 
+		// TMS
+		var publish = {};
+		var publish_name;
+		publish.id = model.id;
+		publish.name = model.name;
+		publish.note = model.note;
+		publish.apps = apps.map(app => app.id);
+		publish_name = 'groups-update';
+		publish.dtupdated = NOW;
+
 		model.id = id;
 		model.apps = undefined;
 		model.dtupdated = NOW;
@@ -77,10 +87,16 @@ NEWSCHEMA('Users/Groups', function(schema) {
 			is && save.push('users');
 
 		} else {
+			publish_name = 'groups-create';
+			publish.dtcreated = NOW;
+			publish.dtupdated = undefined;
+
 			model.dtupdated = undefined;
 			model.dtcreated = NOW;
 			REPO.groups.push(model);
 		}
+
+		PUBLISH(publish_name, FUNC.tms($, publish));
 
 		if (apps) {
 
@@ -128,6 +144,7 @@ NEWSCHEMA('Users/Groups', function(schema) {
 		FUNC.save('groups', 'groups_apps');
 
 		FUNC.refreshgroupsroles(function() {
+			PUBLISH('groups-remove', FUNC.tms($, { id: id }));
 			FUNC.refreshmeta($.done());
 			EMIT('groups/remove', id);
 		});
