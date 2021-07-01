@@ -182,7 +182,7 @@ NEWSCHEMA('Apps', function(schema) {
 		REPO.apps.push(CLONE(model));
 
 		FUNC.refreshapps(function() {
-			PUBLISH('apps-create', FUNC.tms($, model));
+			PUBLISH('apps_create', FUNC.tms($, model));
 			EMIT('apps/create', model.id);
 			FUNC.refreshguest();
 			FUNC.updateroles($.done(model.id));
@@ -235,7 +235,7 @@ NEWSCHEMA('Apps', function(schema) {
 		}
 
 		FUNC.refreshapps(function() {
-			PUBLISH('apps-update', FUNC.tms($, model));
+			PUBLISH('apps_update', FUNC.tms($, model));
 			EMIT('apps/update', $.id);
 			FUNC.refreshguest();
 			FUNC.updateroles($.done($.id));
@@ -257,7 +257,7 @@ NEWSCHEMA('Apps', function(schema) {
 		REPO.apps = REPO.apps.remove('id', $.id);
 		FUNC.save('apps');
 		FUNC.refreshapps(function() {
-			PUBLISH('apps-remove', FUNC.tms($, { success: true, id: $.id }));
+			PUBLISH('apps_remove', FUNC.tms($, { success: true, id: $.id }));
 			FUNC.updateroles($.done());
 			FUNC.clearcache(null, $.id);
 		});
@@ -342,7 +342,7 @@ NEWSCHEMA('Apps', function(schema) {
 			return;
 		}
 
-		PUBLISH('apps-open', FUNC.tms($, { name: app.name }));
+		PUBLISH('apps_open', FUNC.tms($, { name: app.name }));
 
 		DBMS().log($, null, app.name);
 

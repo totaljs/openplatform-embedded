@@ -230,7 +230,7 @@ NEWSCHEMA('Account', function(schema) {
 
 		$.extend && $.extend(model);
 
-		PUBLISH('account-save', FUNC.tms($, model));
+		PUBLISH('account_save', FUNC.tms($, model));
 
 		for (var m in model) {
 			var val = model[m];

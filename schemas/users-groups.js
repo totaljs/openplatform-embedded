@@ -57,7 +57,7 @@ NEWSCHEMA('Users/Groups', function(schema) {
 		publish.name = model.name;
 		publish.note = model.note;
 		publish.apps = apps.map(app => app.id);
-		publish_name = 'groups-update';
+		publish_name = 'groups_update';
 		publish.dtupdated = NOW;
 
 		model.id = id;
@@ -87,7 +87,7 @@ NEWSCHEMA('Users/Groups', function(schema) {
 			is && save.push('users');
 
 		} else {
-			publish_name = 'groups-create';
+			publish_name = 'groups_create';
 			publish.dtcreated = NOW;
 			publish.dtupdated = undefined;
 
@@ -144,7 +144,7 @@ NEWSCHEMA('Users/Groups', function(schema) {
 		FUNC.save('groups', 'groups_apps');
 
 		FUNC.refreshgroupsroles(function() {
-			PUBLISH('groups-remove', FUNC.tms($, { id: id }));
+			PUBLISH('groups_remove', FUNC.tms($, { id: id }));
 			FUNC.refreshmeta($.done());
 			EMIT('groups/remove', id);
 		});
