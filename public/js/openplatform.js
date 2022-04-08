@@ -294,7 +294,7 @@ OP.progress = function(p) {
 OP.init = function(callback, notembedded) {
 
 	if (typeof(callback) === 'boolean') {
-		embeded = callback;
+		notembedded = callback;
 		callback = null;
 	}
 
